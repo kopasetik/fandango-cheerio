@@ -19,5 +19,14 @@
   },
   "directories": {
     "test": "test"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kopasetik/fandango-cheerio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kopasetik/fandango-cheerio/issues"
+  },
+  "homepage": "https://github.com/kopasetik/fandango-cheerio#readme"
 }
