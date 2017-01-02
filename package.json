@@ -1,0 +1,23 @@
+{
+  "name": "fandango-cheerio",
+  "version": "1.0.0",
+  "description": "get movie data",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "livereload ."
+  },
+  "keywords": [],
+  "author": "Wale O.",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "cheerio": "^0.22.0",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "mocha": "^3.2.0"
+  },
+  "directories": {
+    "test": "test"
+  }
+}
