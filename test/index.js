@@ -2,6 +2,7 @@ const assert = require('assert')
 const main = require('../server.js')
 const axios = require('axios')
 const cheerio = require('cheerio')
+const request = require('supertest');
 let $
 
 
@@ -197,4 +198,113 @@ describe('String manipulation', function(){
       assert.deepStrictEqual(splitWithRegex('1 hr'), {rating: '', runtime: '1 hr'})
     })
   })
+})
+
+describe('/?zipCode=number', function () {
+  let server
+  const urlRoute = '/?zipCode=98104'
+
+  beforeEach(function () {
+    server = require('../server')
+  })
+
+  it('should give a json response',
+    function (done) {
+      request(server)
+        .get(urlRoute)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+    })
+
+  it('should give the first 5 fandango results for that zip code',
+    function (done) {
+      request(server)
+        .get(urlRoute)
+        .expect(function (res) {
+            if (res.body.length !== 5){
+              res.body.map(function (el, idx){
+                console.log(idx)
+              })
+              throw Error('There aren\'t exactly 5 results')
+            }
+        })
+        .expect(200, done)
+    })
+
+  it('should have result objects that '
+    + 'all have "theater", "address", and "movies" properties',
+    function (done) {
+      function checkProperties(obj) {
+        return (obj.theater && obj.address && obj.movies)
+      }
+      function throwPropertiesError (res){
+        if (!res.body.every(checkProperties)){
+          throw Error('There is a missing property!')
+        }
+      }
+      request(server)
+        .get(urlRoute)
+        .expect(throwPropertiesError)
+        .expect(200, done)
+    })
+
+    afterEach(function () {
+      server.close()
+    })
+})
+
+describe('/?zipCode=number1&pg=number2', function () {
+  let server
+  const urlRoute = '/?zipCode=98104&pg=2'
+
+  beforeEach(function () {
+    server = require('../server')
+  })
+
+  it('should give a json response',
+    function (done) {
+      request(server)
+      .get(urlRoute)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200, done)
+    })
+
+  it('should give a nonzero number of results',
+    function (done) {
+      request(server)
+      .get(urlRoute)
+      .expect(function (res) {
+        if (res.body.length === 0){
+          res.body.map(function (el, idx){
+            console.log(idx)
+          })
+          throw Error('There are 0 results')
+        }
+      })
+      .expect(200, done)
+    })
+
+    it('should have result objects that '
+    + 'all have "theater", "address", and "movies" properties',
+    function (done) {
+      function checkProperties(obj) {
+        return (obj.theater && obj.address && obj.movies)
+      }
+      function throwPropertiesError (res){
+        if (!res.body.every(checkProperties)){
+          throw Error('There is a missing property!')
+        }
+      }
+      request(server)
+      .get(urlRoute)
+      .expect(throwPropertiesError)
+      .expect(200, done)
+    })
+
+  afterEach(function () {
+    server.close()
+  })
+
 })
