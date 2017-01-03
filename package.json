@@ -20,7 +20,9 @@
   "directories": {
     "test": "test"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "supertest": "^2.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kopasetik/fandango-cheerio.git"
