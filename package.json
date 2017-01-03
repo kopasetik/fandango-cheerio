@@ -1,5 +1,8 @@
 {
   "name": "fandango-cheerio",
+  "bin": {
+    "fancheerio": "./server.js"
+  },
   "version": "2.0.0",
   "description": "get movie data",
   "main": "app.js",

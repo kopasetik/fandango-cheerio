@@ -1,3 +1,4 @@
+#! /usr/local/bin/node
 const cheerio = require('cheerio')
 const axios = require('axios')
 const zipCode = process.argv[2] || 98104
@@ -71,7 +72,7 @@ const getShowtimes = (req, res) => {
 }
 
 const getMoviesInTheaters = (req, res) => {
-  
+
 }
 
 app.get('/', getShowtimes)
