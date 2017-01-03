@@ -60,7 +60,7 @@ function getMovies(loadedHTML){
 }
 
 const getShowtimes = (req, res) => {
-  return axios.get(`http://www.fandango.com/${req.params.urlZipCode || zipCode}_movietimes`)
+  return axios.get(`http://www.fandango.com/${req.query.zipCode || zipCode}_movietimes${req.query.pg ? ('\?pn=' + req.query.pg) : ''}`)
   .then(function (response) {
     return cheerio.load(response.data)
   })
@@ -70,12 +70,10 @@ const getShowtimes = (req, res) => {
   })
 }
 
-app.get('/zipCode/:urlZipCode', getShowtimes)
+app.get('/', getShowtimes)
 
-app.listen(app.get('port'), () => {
+const server = app.listen(app.get('port'), () => {
   console.log('App is running at http://localhost:%d',  app.get('port'))
 })
 
-module.exports = exports = {
-
-}
+module.exports = server
