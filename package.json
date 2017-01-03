@@ -1,6 +1,6 @@
 {
   "name": "fandango-cheerio",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "get movie data",
   "main": "app.js",
   "scripts": {

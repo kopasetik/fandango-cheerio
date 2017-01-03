@@ -70,6 +70,10 @@ const getShowtimes = (req, res) => {
   })
 }
 
+const getMoviesInTheaters = (req, res) => {
+  
+}
+
 app.get('/', getShowtimes)
 
 const server = app.listen(app.get('port'), () => {
