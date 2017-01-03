@@ -1,4 +1,4 @@
-#! /usr/local/bin/node
+#! /usr/bin/env node
 const cheerio = require('cheerio')
 const axios = require('axios')
 const zipCode = process.argv[2] || 98104
